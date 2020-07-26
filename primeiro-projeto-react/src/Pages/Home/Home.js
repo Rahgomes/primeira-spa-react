@@ -52,9 +52,9 @@ class App extends Component {
   }
 
   componentDidMount() {
-    ApiService.ListaAutores()    
+    ApiService.ListaAutores()
       .then(res => {
-        if(res.message === 'success'){
+        if (res.message === 'success') {
           this.setState({
             autores: [...this.state.autores, ...res.data]
           });
@@ -64,12 +64,19 @@ class App extends Component {
   }
 
   render() {
+    const campos = [
+      { titulo: 'Autores', dado: 'nome' },
+      { titulo: 'Livros', dado: 'livro' },
+      { titulo: 'Preços', dado: 'preco' },
+       'remover'
+    ];
+
     return (
       <Fragment>
         <Header />
         <div className="container mb-10">
           <h1>Livraria do Rah</h1>
-          <Tabela autores={this.state.autores} removeAutor={this.removeAutor} />
+          <Tabela campos={campos} dados={this.state.autores} removeDados={this.removeAutor} />
           <Form escutadorDeSubmit={this.escutadorDeSubmit} />
         </div>
       </Fragment>
